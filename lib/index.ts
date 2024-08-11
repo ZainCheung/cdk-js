@@ -25,18 +25,18 @@ export class Cdk implements CdkI {
 
     private validateSecret(secret: number[][]): void {
         if (secret.length !== 16) {
-            throw new Error("Secret length must be 16");
+            throw new Error('Secret length must be 16');
         }
         for (const s of secret) {
             if (s.length !== 8) {
-                throw new Error("Secret element length must be 8");
+                throw new Error('Secret element length must be 8');
             }
         }
     }
 
     private validateCharTable(charTable: string[]): void {
         if (charTable.length !== 32) {
-            throw new Error("CharTable length must be 32");
+            throw new Error('CharTable length must be 32');
         }
     }
 
@@ -52,8 +52,13 @@ export class Cdk implements CdkI {
         const freshBinary = this.toBinaryString(randomFresh, 4);
         const secretKey = this.secret[randomFresh];
 
-        if (!inputArr || !secretKey || inputArr.length !== 8 || secretKey.length !== 8) {
-            throw new Error("Secret key not found");
+        if (
+            !inputArr ||
+            !secretKey ||
+            inputArr.length !== 8 ||
+            secretKey.length !== 8
+        ) {
+            throw new Error('Secret key not found');
         }
 
         let sign = 0;
@@ -62,17 +67,21 @@ export class Cdk implements CdkI {
             const inputVal = inputArr[i];
             const secretVal = secretKey[i];
             if (inputVal === undefined || secretVal === undefined) {
-                throw new Error("inputArr or secretKey contains undefined values");
+                throw new Error(
+                    'inputArr or secretKey contains undefined values'
+                );
             }
             sign += inputVal * secretVal;
-            newId += this.xorBinaryStrings(this.toBinaryString(inputVal, 4), this.toBinaryString(secretVal, 4));
+            newId += this.xorBinaryStrings(
+                this.toBinaryString(inputVal, 4),
+                this.toBinaryString(secretVal, 4)
+            );
         }
         const sign14 = this.toBinaryString(sign, 14);
         const finalBinaryCode = sign14 + freshBinary + newId;
 
         return this.binaryStringToCode(finalBinaryCode);
     }
-
 
     /**
      * 解析激活码
@@ -90,16 +99,19 @@ export class Cdk implements CdkI {
         const secretKey = this.secret[freshInt];
 
         if (!secretKey) {
-            throw new Error("Secret key not found");
+            throw new Error('Secret key not found');
         }
 
         let originalId = '';
         for (let i = 0; i < 8; i++) {
             const secretKeyVal = secretKey[i];
             if (secretKeyVal === undefined) {
-                throw new Error("Secret key not found");
+                throw new Error('Secret key not found');
             }
-            originalId += this.xorBinaryStrings(incrementIDBinary.substr(i * 4, 4), this.toBinaryString(secretKeyVal, 4));
+            originalId += this.xorBinaryStrings(
+                incrementIDBinary.substr(i * 4, 4),
+                this.toBinaryString(secretKeyVal, 4)
+            );
         }
         const lastId = this.binaryStringToDecimal(originalId);
 
@@ -109,12 +121,14 @@ export class Cdk implements CdkI {
             const inputVal = inputArr[i];
             const secretVal = secretKey[i];
             if (inputVal === undefined || secretVal === undefined) {
-                throw new Error("inputArr or secretKey contains undefined values");
+                throw new Error(
+                    'inputArr or secretKey contains undefined values'
+                );
             }
             signInt += inputVal * secretVal;
         }
         if (signInt !== signNum) {
-            throw new Error("Invalid code");
+            throw new Error('Invalid code');
         }
         return lastId;
     }
@@ -124,7 +138,10 @@ export class Cdk implements CdkI {
      * @param startIncrementID 起始自增ID
      * @param count 生成数量
      */
-    async batchGenerate(startIncrementID: number, count: number): Promise<string[]> {
+    async batchGenerate(
+        startIncrementID: number,
+        count: number
+    ): Promise<string[]> {
         const results: string[] = [];
         for (let i = 0; i < count; i++) {
             const code = await this.generate(startIncrementID + i);
@@ -157,7 +174,7 @@ export class Cdk implements CdkI {
             const str1 = s1[i];
             const str2 = s2[i % s2.length];
             if (str1 === undefined || str2 === undefined) {
-                throw new Error("Invalid input strings");
+                throw new Error('Invalid input strings');
             }
             const b1 = parseInt(str1, 10);
             const b2 = parseInt(str2, 10);
@@ -174,7 +191,10 @@ export class Cdk implements CdkI {
         return parseInt(binary, 2);
     }
 
-    private binaryStringToDecimalArray(binary: string, chunkSize: number): number[] {
+    private binaryStringToDecimalArray(
+        binary: string,
+        chunkSize: number
+    ): number[] {
         const arr: number[] = [];
         for (let i = 0; i < binary.length; i += chunkSize) {
             arr.push(this.binaryStringToDecimal(binary.substr(i, chunkSize)));
@@ -185,7 +205,8 @@ export class Cdk implements CdkI {
     private binaryStringToCode(binary: string): string {
         let result = '';
         for (let i = 0; i < binary.length; i += 5) {
-            result += this.charTable[this.binaryStringToDecimal(binary.substr(i, 5))];
+            result +=
+                this.charTable[this.binaryStringToDecimal(binary.substr(i, 5))];
         }
         return result;
     }
