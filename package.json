@@ -1,0 +1,39 @@
+{
+  "name": "cdk-js",
+  "version": "1.0.0",
+  "description": "Generator and parser for redemption codes for javascript",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZainCheung/cdk-js"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint ./lib ./test",
+    "format": "prettier --write 'lib/**/*.{js,ts,tsx,css,md}'",
+    "build": "tsc -p tsconfig.json"
+  },
+  "keywords": [
+    "cdkey",
+    "code",
+    "generator",
+    "parser"
+  ],
+  "author": {
+    "email": "ZainCheung@gmail.com",
+    "name": "ZainCheung",
+    "url": "https://github.com/ZainCheung"
+  },
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "@types/jest": "^29.5.12",
+    "eslint": "^9.9.0",
+    "globals": "^15.9.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.4",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.1"
+  }
+}

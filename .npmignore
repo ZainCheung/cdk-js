@@ -1,0 +1,25 @@
+# 忽略 node_modules 目录
+node_modules
+
+# 忽略测试文件
+test
+
+# 忽略 TypeScript 源文件
+lib/*.ts
+
+# 忽略构建配置文件
+tsconfig.json
+config/
+.prettierrc.json
+.prettierignore
+eslint.config.mjs
+jest.config.js
+
+
+# 忽略本地开发环境文件
+*.log
+*.env
+.DS_Store
+.idea/
+.vscode/
+dist/

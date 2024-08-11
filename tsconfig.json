@@ -1,0 +1,36 @@
+{
+  "extends": "./config/tsconfig.base.json",
+  "files": ["lib/index.ts", "lib/example.ts"],
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "ES2015",
+    "declaration": true,
+    "outDir": "./dist",
+    "noEmit": false,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": [
+    "./lib"
+  ],
+  "exclude": [
+    "./test",
+    "node_modules"
+  ]
+}
