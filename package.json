@@ -1,6 +1,6 @@
 {
   "name": "cdkey-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Generator and parser for redemption codes for javascript",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
