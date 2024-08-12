@@ -4,6 +4,8 @@
   "description": "Generator and parser for redemption codes for javascript",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
+  "files": ["dist", "LICENSE", "README.md", "package.json"],
   "repository": {
     "type": "git",
     "url": "https://github.com/ZainCheung/cdk-js"
