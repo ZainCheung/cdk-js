@@ -5,7 +5,7 @@
     "target": "ES2015",
     "module": "ES2015",
     "declaration": true,
-    "outDir": "./dist",
+    "outDir": "./dist/esm",
     "noEmit": false,
     "strict": true,
     "noImplicitAny": true,

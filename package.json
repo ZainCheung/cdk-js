@@ -1,11 +1,16 @@
 {
-  "name": "cdk-js",
-  "version": "1.0.0",
+  "name": "cdkey-js",
+  "version": "1.0.1",
   "description": "Generator and parser for redemption codes for javascript",
-  "main": "./dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
-  "type": "module",
-  "files": ["dist", "LICENSE", "README.md", "package.json"],
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZainCheung/cdk-js.git"
@@ -14,7 +19,10 @@
     "test": "jest",
     "lint": "eslint ./lib ./test",
     "format": "prettier --write 'lib/**/*.{js,ts,tsx,css,md}'",
-    "build": "tsc -p tsconfig.json"
+    "build:cjs": "tsc -p tsconfig-cjs.json",
+    "build:esm": "tsc -p tsconfig.json",
+    "build": "npm run build:cjs && npm run build:esm",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "cdkey",
