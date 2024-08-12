@@ -1,4 +1,4 @@
-import { Cdk, CdkI } from './index'; // change to './index' from 'cdk-js' when using this in your project
+import { Cdk, CdkI, GenerateRandomSecret } from './index'; // change to './index' from 'cdkey-js' when using this in your project
 
 // 示例的秘钥和字符表数据
 export const ExampleSecret: number[][] = [
@@ -56,18 +56,18 @@ export const ExampleCharTable: string[] = [
 ];
 
 // 示例使用
-const cdk: CdkI = new Cdk(ExampleSecret, ExampleCharTable);
+const cdk: CdkI = new Cdk(GenerateRandomSecret(), ExampleCharTable);
 
 export async function TestCdk() {
     const incrementID = 123456;
     try {
-        const generatedCode = await cdk.generate(incrementID);
+        const generatedCode = cdk.generate(incrementID);
         console.log('Generated Code:', generatedCode);
 
-        const parsedID = await cdk.parse(generatedCode);
+        const parsedID = cdk.parse(generatedCode);
         console.log('Parsed ID:', parsedID);
 
-        const batchCodes = await cdk.batchGenerate(incrementID, 5);
+        const batchCodes = cdk.batchGenerate(incrementID, 5);
         console.log('Batch Generated Codes:', batchCodes);
     } catch (error) {
         console.error('Error:', error);

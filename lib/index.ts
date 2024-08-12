@@ -4,9 +4,9 @@ import * as crypto from 'crypto';
  * 兑换码生成器接口
  */
 export interface CdkI {
-    generate(input: number): Promise<string>;
-    parse(code: string): Promise<number>;
-    batchGenerate(startIncrementID: number, count: number): Promise<string[]>;
+    generate(input: number): string;
+    parse(code: string): number;
+    batchGenerate(startIncrementID: number, count: number): string[];
 }
 
 /**
@@ -45,7 +45,7 @@ export class Cdk implements CdkI {
      * @param incrementID 自增ID
      * @returns 10位激活码
      */
-    async generate(incrementID: number): Promise<string> {
+    generate(incrementID: number): string {
         const id = this.toBinaryString(incrementID, 32);
         const inputArr = this.binaryStringToDecimalArray(id, 4);
         const randomFresh = crypto.randomInt(0, 16);
@@ -88,8 +88,8 @@ export class Cdk implements CdkI {
      * @param code 激活码
      * @returns 自增ID
      */
-    async parse(code: string): Promise<number> {
-        const binaryString = await this.convertToBinary(code);
+    parse(code: string): number {
+        const binaryString = this.convertToBinary(code);
         const signatureBinary = binaryString.substring(0, 14);
         const freshnessBinary = binaryString.substring(14, 18);
         const incrementIDBinary = binaryString.substring(18);
@@ -138,20 +138,17 @@ export class Cdk implements CdkI {
      * @param startIncrementID 起始自增ID
      * @param count 生成数量
      */
-    async batchGenerate(
-        startIncrementID: number,
-        count: number
-    ): Promise<string[]> {
+    batchGenerate(startIncrementID: number, count: number): string[] {
         const results: string[] = [];
         for (let i = 0; i < count; i++) {
-            const code = await this.generate(startIncrementID + i);
+            const code = this.generate(startIncrementID + i);
             results.push(code);
         }
         return results;
     }
 
     // 将字符转换为二进制字符串
-    private async convertToBinary(s: string): Promise<string> {
+    private convertToBinary(s: string): string {
         let binaryString = '';
         for (let i = 0; i < s.length; i++) {
             const char = s[i];
@@ -210,4 +207,33 @@ export class Cdk implements CdkI {
         }
         return result;
     }
+}
+
+/**
+ * 生成随机密钥
+ * needLog: 是否需要打印密钥
+ * @constructor
+ */
+export function GenerateRandomSecret(needLog: boolean = false): number[][] {
+    const secret: number[][] = [];
+    if (needLog) {
+        console.log(
+            'Here is your random secret key table, please copy and paste it to your code:'
+        );
+        console.log('const ExampleSecret = [');
+    }
+    for (let i = 0; i < 16; i++) {
+        const secretKey: number[] = [];
+        for (let j = 0; j < 8; j++) {
+            secretKey.push(crypto.randomInt(0, 16));
+        }
+        secret.push(secretKey);
+        if (needLog) {
+            console.log(`[${secretKey.join(', ')}],`);
+        }
+    }
+    if (needLog) {
+        console.log('];');
+    }
+    return secret;
 }

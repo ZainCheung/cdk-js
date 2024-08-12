@@ -1,6 +1,6 @@
 {
   "name": "cdkey-js",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Generator and parser for redemption codes for javascript",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -18,11 +18,11 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./lib ./test",
-    "format": "prettier --write 'lib/**/*.{js,ts,tsx,css,md}'",
+    "format": "prettier --write 'lib/**/*.{js,ts,tsx,css,md}' 'test/**/*.{js,ts,tsx,css,md}'",
     "build:cjs": "tsc -p tsconfig-cjs.json",
     "build:esm": "tsc -p tsconfig.json",
     "build": "npm run build:cjs && npm run build:esm",
-    "prepublish": "npm run build"
+    "prepublish": "npm run lint && npm run format && npm run build"
   },
   "keywords": [
     "cdkey",
