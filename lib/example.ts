@@ -20,40 +20,7 @@ export const ExampleSecret: number[][] = [
     [60, 61, 62, 63, 64, 65, 66, 67],
 ];
 
-export const ExampleCharTable: string[] = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-];
+export const ExampleCharTable: string[] = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'.split('');
 
 // 示例使用
 const cdk: CdkI = new Cdk(GenerateRandomSecret(), ExampleCharTable);

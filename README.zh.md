@@ -25,40 +25,7 @@ import { Cdk, CdkI, GenerateRandomSecret } from "cdkey-js";
 // 或者 
 // const {Cdk, CdkI, GenerateRandomSecret} = require('cdkey-js/dist/cjs');
 
-const ExampleCharTable: string[] = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-];
+const ExampleCharTable: string[] = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'.split('');
 
 // 实际使用中请提前生成一个秘钥表 不要在运行时生成
 // GenerateRandomSecret(true); 会生成一个随机秘钥表并打印到控制台

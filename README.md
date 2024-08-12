@@ -26,40 +26,7 @@ import { Cdk, CdkI, GenerateRandomSecret } from "cdkey-js";
 // or 
 // const {Cdk, CdkI, GenerateRandomSecret} = require('cdkey-js/dist/cjs');
 
-const ExampleCharTable: string[] = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
-    'P',
-    'Q',
-    'R',
-    'S',
-    'T',
-    'U',
-    'V',
-    'W',
-    'X',
-    'Y',
-    'Z',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-];
+const ExampleCharTable: string[] = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'.split('');
 
 // In practice, please generate a key table in advance, not at runtime.
 // GenerateRandomSecret(true); will generate a random key table and print it to the console.
